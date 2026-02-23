@@ -17,6 +17,7 @@ UCLASS(abstract)
 class ANaturePlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
 	
 protected:
 
