@@ -135,13 +135,29 @@ void ANatureCharacter::DoJumpEnd()
 
 void ANatureCharacter::BeginPlay()
 {
+	//CachedPosition = GetMesh()->GetComponentLocation();
+	Super::BeginPlay();
 	if (UNatureGameInstance* GameInstance = Cast<UNatureGameInstance>(GetGameInstance()))
 	{
 		GameInstance->OnSteppedTick.AddDynamic(this, &ANatureCharacter::SteppedTick);
 	}
+	
 }
 
 void ANatureCharacter::SteppedTick(float DeltaSeconds)
 {
+	GetMesh()->SetWorldLocation(GetActorLocation() + FVector(0.0f, 0.0f, -89.0f));
+	CachedPosition = GetMesh()->GetComponentLocation();
+	bUpdatedPosition = true;
+}
+
+void ANatureCharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	if (bUpdatedPosition)
+	{
+		GetMesh()->SetWorldLocation(CachedPosition);
+		//bUpdatedPosition = false;
+	}
 	
 }

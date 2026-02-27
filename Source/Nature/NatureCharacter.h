@@ -67,6 +67,10 @@ protected:
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 
+	FVector CachedPosition;
+
+	bool bUpdatedPosition = false;
+
 public:
 
 	/** Handles move inputs from either controls or UI interfaces */
@@ -89,6 +93,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void SteppedTick(float DeltaSeconds);
+
+	virtual void Tick(float DeltaSeconds) override;
 
 public:
 
