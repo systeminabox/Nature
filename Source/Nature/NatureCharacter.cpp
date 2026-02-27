@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "Nature.h"
+#include "NatureGameInstance.h"
 
 ANatureCharacter::ANatureCharacter()
 {
@@ -130,4 +131,17 @@ void ANatureCharacter::DoJumpEnd()
 {
 	// signal the character to stop jumping
 	StopJumping();
+}
+
+void ANatureCharacter::BeginPlay()
+{
+	if (UNatureGameInstance* GameInstance = Cast<UNatureGameInstance>(GetGameInstance()))
+	{
+		GameInstance->OnSteppedTick.AddDynamic(this, &ANatureCharacter::SteppedTick);
+	}
+}
+
+void ANatureCharacter::SteppedTick(float DeltaSeconds)
+{
+	
 }

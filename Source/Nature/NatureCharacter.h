@@ -85,6 +85,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void DoJumpEnd();
 
+	virtual void BeginPlay() override;
+
+	UFUNCTION(BlueprintCallable, Category="Input")
+	virtual void SteppedTick(float DeltaSeconds);
+
 public:
 
 	/** Returns CameraBoom subobject **/
